@@ -10,7 +10,7 @@ LIST_FIELDS = ["group", "title", "subtitle", "message", "delivered_at"]
 
 
 class TerminalNotifier(object):
-    TERMINAL_NOTIFIER_VERSION = "1.6.1"
+    TERMINAL_NOTIFIER_VERSION = "1.6.1-rc1"
 
     def __init__(self):
         """
@@ -75,7 +75,7 @@ class TerminalNotifier(object):
 
     def execute(self, args):
         args = [str(arg) for arg in args]
-        output = subprocess.Popen([self.bin_path, ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        output = subprocess.Popen(['reattach-to-user-namespace', self.bin_path, ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
         if self.wait:
             output.wait()
